@@ -42,13 +42,13 @@ The above setting will return all groups the user is a member of.
 ## 3. Create a new Application
 Select the 'Applications' dropdown and then 'Applications'. Click 'Add Application' and 'Create New App'
 
-- For 'Platform', choose `Web`, and for 'Sign on method' choose `OpenID Connect`. You will be asked to fill in some fields:
-  **Application Name**: Any appropriate name.
-  **Application Logo**: Optional - an image for your app.
-  **Login redirect URIs**: Add the URI of your `sso-auth` deployment, with the path suffix `/oauth2/callback`.
+For 'Platform', choose `Web`, and for 'Sign on method' choose `OpenID Connect`. You will be asked to fill in some fields:
+- **Application Name**: Any appropriate name.
+-  **Application Logo**: Optional - an image for your app.
+-  **Login redirect URIs**: Add the URI of your `sso-auth` deployment, with the path suffix `/oauth2/callback`.
     For example, if `sso-auth` will be accessible at the domain `sso-auth.example.com`, then add the URI
     `https://sso-auth.example.com/oauth2/callback`. Multiple URIs can be added if required.
-  **Logout redirect URIs**: This can be left blank.
+-  **Logout redirect URIs**: This can be left blank.
 
 **⚡️ Note**: If you're following the Quickstart guide, use http://sso-auth.localtest.me as the Authorized redirect URI.
 
