@@ -10,7 +10,7 @@ Select the 'Security' dropdown and then 'API'. If you don't then see 'Authorizat
 you will need to contact Okta Support to have this feature enabled.
 (If you are logged in to an Okta Developer console, then this will be under the 'API' dropdown and then 'Authorization Servers')
 
-![Homepage API dropdown](img/okta/okta-auth-homepage-api.jpg)
+![Homepage API dropdown](img/okta/okta-homepage-api.jpg)
 
 
 For the purpose of this example we will use the default server that is provided, however you can create a new one if preferred.
@@ -18,22 +18,21 @@ For the purpose of this example we will use the default server that is provided,
 ## 2. Configure your Authorization Server
 - Select your Authorization server, and then 'Scopes' and 'Edit'. The only additional scope you will need to add is a scope for groups.
 
-	Click 'Add Scope' and fill in the fields with the below options:
+  Click 'Add Scope' and fill in the fields with the below options:
 
 ![Auth Server Scope](img/okta/okta-auth-server-scope.jpg)
 
-	It is important the **Name** is simply `groups`. The other fields can be customised however we recommend the above.
+  It is important the **Name** is simply `groups`. The other fields can be customised however we recommend the above.
 
 - Select 'Claims' and then 'Edit'. You now need to add a claim for `groups`.
-
-	Click 'Add Claim' and fill in the fields with the below options:
+  Click 'Add Claim' and fill in the fields with the below options:
 
 ![Auth Server Claims](img/okta/okta-auth-server-claims.jpg)
 
-	The regex for `Filter` can be changed to fit your organisational requirements.
-    This determines whether all groups (that are assigned to the application you will create below)
-    a user is a member of will be returned, or if only a subset of groups matching the given regex will be returned.
-    The above setting will return all groups the user is a member of.
+  The regex for `Filter` can be changed to fit your organisational requirements.
+  This determines whether all groups (that are assigned to the application you will create below)
+  a user is a member of will be returned, or if only a subset of groups matching the given regex will be returned.
+  The above setting will return all groups the user is a member of.
 
 ## 3. Create a new Application
 - Select the 'Applications' dropdown and then 'Applications'. Click 'Add Application' and 'Create New App'
