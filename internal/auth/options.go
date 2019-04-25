@@ -254,11 +254,12 @@ func validateCookieName(o *Options, msgs []string) []string {
 
 func newProvider(o *Options) (providers.Provider, error) {
 	p := &providers.ProviderData{
-		Scope:              o.Scope,
-		ClientID:           o.ClientID,
-		ClientSecret:       o.ClientSecret,
-		ApprovalPrompt:     o.ApprovalPrompt,
-		SessionLifetimeTTL: o.SessionLifetimeTTL,
+		Scope:                 o.Scope,
+		ClientID:              o.ClientID,
+		ClientSecret:          o.ClientSecret,
+		ApprovalPrompt:        o.ApprovalPrompt,
+		SessionLifetimeTTL:    o.SessionLifetimeTTL,
+		GroupsCacheRefreshTTL: o.GroupsCacheRefreshTTL,
 	}
 
 	var err error

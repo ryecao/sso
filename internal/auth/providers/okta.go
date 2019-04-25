@@ -315,33 +315,37 @@ func (p *OktaProvider) verifyEmailWithAccessToken(AccessToken string) (string, e
 // - sends a request to the /userinfo endpoint to return a slice of users' group membership
 // - compares allowed groups to users' groups.
 // Conditionally returns an empty (nil) slice or a slice of the matching groups.
-func (p *OktaProvider) ValidateGroupMembership(email string, allowedGroups []string, accessToken string) ([]string, error) {
+func (p *OktaProvider) ValidateGroupMembership(email string, allowedGroups []string, accessToken string, validGroups []string) ([]string, []string, error) {
+	logger := log.NewLogEntry()
 	if accessToken == "" {
-		return nil, ErrBadRequest
+		return nil, nil, ErrBadRequest
 	}
 
 	if len(allowedGroups) == 0 {
-		return []string{}, nil
+		return []string{}, nil, nil
 	}
 
-	userinfo, err := p.GetUserProfile(accessToken)
-	if err != nil {
-		return nil, err
-	}
-	if len(userinfo.Groups) == 0 {
-		return nil, errors.New("no group membership found")
+	if len(validGroups) == 0 {
+		groupMembership, err := p.GetUserProfile(accessToken)
+		if err != nil {
+			return nil, nil, err
+		}
+		if len(groupMembership.Groups) == 0 {
+			return nil, nil, errors.New("no group membership found")
+		}
+		validGroups = groupMembership.Groups
 	}
 
 	matchingGroups := []string{}
 	for _, x := range allowedGroups {
-		for _, y := range userinfo.Groups {
+		for _, y := range validGroups {
 			if x == y {
 				matchingGroups = append(matchingGroups, x)
 				break
 			}
 		}
 	}
-	return matchingGroups, nil
+	return matchingGroups, validGroups, nil
 }
 
 // GetUserProfile takes in an access token and sends a request to the /userinfo endpoint.
